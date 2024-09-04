@@ -11,9 +11,10 @@
 {strip}
 {assign var="pageTitle" value="plugins.importexport.copernicus.selectIssue.long"}
 {assign var="pageCrumbTitle" value="plugins.importexport.copernicus.selectIssue.short"}
-{include file="common/header.tpl"}
 {/strip}
 
+{extends file="layouts/backend.tpl"}
+{block name="page"}
 <br/>
 
 <div id="issues">
@@ -22,9 +23,10 @@
 		<td colspan="4" class="headseparator">&nbsp;</td>
 	</tr>
 	<tr class="heading" valign="bottom">
-		<td width="65%">{translate key="issue.issue"}</td>
+		<td width="55%">{translate key="issue.issue"}</td>
 		<td width="15%">{translate key="editor.issues.published"}</td>
 		<td width="15%">{translate key="editor.issues.numArticles"}</td>
+		<td width="10%" align="right">{translate key="common.action"}</td
 		<td width="5%" align="right">{translate key="common.action"}</td>
 	</tr>
 	<tr>
@@ -36,7 +38,8 @@
 		<td><a href="{url page="issue" op="view" path=$issue->getId()}" class="action">{$issue->getIssueIdentification()|strip_unsafe_html|nl2br}</a></td>
 		<td>{$issue->getDatePublished()|date_format:"$dateFormatShort"|default:"&mdash;"}</td>
 		<td>{$issue->getNumArticles()|escape}</td>
-		<td align="right"><a href="{plugin_url}exportIssue/{$issue->getId()}" class="action">{translate key="common.export"}</a></td>
+		<td align="right"><a href="{plugin_url}validateIssue/{$issue->getId()}" class="pkp_button export">{translate key="plugins.importexport.copernicus.validate"}</a></td>
+		<td align="right"><a href="{plugin_url}exportIssue/{$issue->getId()}" class="pkp_button export">{translate key="common.export"}</a></td>
 	</tr>
 	<tr>
 		<td colspan="4" class="{if $issues->eof()}end{/if}separator">&nbsp;</td>
@@ -57,4 +60,4 @@
 {/if}
 </table>
 </div>
-{include file="common/footer.tpl"}
+{/block}
